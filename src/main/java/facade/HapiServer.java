@@ -33,10 +33,7 @@ public class HapiServer extends RestfulServer {
    */
   @Override
   public void initialize() {
-    /*
-     * Two resource providers are defined. Each one handles a specific
-     * type of resource.
-     */
+
     DbService dbService = new DbService();
 
     List<IResourceProvider> providers = new ArrayList<IResourceProvider>();
@@ -47,6 +44,5 @@ public class HapiServer extends RestfulServer {
      * Use nice coloured HTML when a browser is used to request the content
      */
     registerInterceptor(new ResponseHighlighterInterceptor());
-
   }
 }
