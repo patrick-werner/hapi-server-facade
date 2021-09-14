@@ -4,7 +4,6 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.server.IResourceProvider;
 import ca.uhn.fhir.rest.server.RestfulServer;
 import ca.uhn.fhir.rest.server.interceptor.ResponseHighlighterInterceptor;
-import dbService.DbService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
@@ -34,10 +33,9 @@ public class HapiServer extends RestfulServer {
   @Override
   public void initialize() {
 
-    DbService dbService = new DbService();
 
     List<IResourceProvider> providers = new ArrayList<IResourceProvider>();
-    providers.add(new RestfulPatientResourceProvider(dbService));
+    // TODO: add provider
     setResourceProviders(providers);
 
     /*
