@@ -35,10 +35,16 @@ public class RestfulPatientResourceProvider implements IResourceProvider {
   public Patient read(@IdParam IdType theId) {
 
     //get the PatientDAO from the DB
-
+    PatientDAO patientDAO = dbService.getPatientById(theId.getIdPart());
+    if (patientDAO == null) {
+      throw new ResourceNotFoundException(theId);
+    }
 
     //CREATE FHIR Patient
     Patient patient = new Patient();
+    patient.setId(patientDAO.getId());
+    patient.addName().addGiven(patientDAO.getGiven()).setFamily(patientDAO.getName());
+    patient.setGender(AdministrativeGender.fromCode(patientDAO.getGender()));
 
     return patient;
   }
@@ -49,7 +55,25 @@ public class RestfulPatientResourceProvider implements IResourceProvider {
 
     //create PatientDAO
     PatientDAO patientDAO = new PatientDAO();
-
+    String gender = "";
+    switch (thePatient.getGender()) {
+      case MALE:
+        gender = "male";
+        break;
+      case FEMALE:
+        gender = "female";
+        break;
+      case OTHER:
+        gender = "other";
+        break;
+      case UNKNOWN:
+        gender = "unknown";
+        break;
+    }
+    patientDAO.setGender(gender);
+    patientDAO.setId(resourceId);
+    patientDAO.setGiven(thePatient.getNameFirstRep().getGivenAsSingleString());
+    patientDAO.setName(thePatient.getNameFirstRep().getFamily());
 
     dbService.addPatient(patientDAO);
 

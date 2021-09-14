@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class DbService {
 
-  private Map<String, PatientDAO> patients = new HashMap<String, PatientDAO>();
+  private Map<String, PatientDAO> patients = new HashMap<>();
 
   public PatientDAO getPatientById(String id) {
     return patients.get(id);

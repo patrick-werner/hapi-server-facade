@@ -19,7 +19,6 @@ public class HapiServer extends RestfulServer {
 
   private static final Logger LOG = LoggerFactory.getLogger(
       HapiServer.class);
-  private static final long serialVersionUID = 1L;
 
   /**
    * Constructor
