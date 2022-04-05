@@ -10,7 +10,7 @@
   <name>HAPI FHIR Server Example</name>
 
   <properties>
-    <hapifhir_version>5.1.0</hapifhir_version>
+    <hapifhir_version>5.7.0</hapifhir_version>
   </properties>
 
   <dependencies>
